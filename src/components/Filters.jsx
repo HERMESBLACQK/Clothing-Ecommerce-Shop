@@ -66,7 +66,7 @@ const Filters = () => {
   ]);
  
   return (
-    <Form className="bg-base-200 rounded-md h-[650px] px-4 max-md:grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 items-center">
+    <Form className="bg-base-200 rounded-md h-[650px] max-md:h-[730px] max-md:mb-4 px-4 max-md:grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 items-center">
       <div className="border p-1">
     
       </div>

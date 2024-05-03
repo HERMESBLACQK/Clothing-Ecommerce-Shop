@@ -3,6 +3,8 @@ import { Link, useNavigate } from "react-router-dom";
 import { SectionTitle } from "../components";
 import { nanoid } from "nanoid";
 import { toast } from "react-toastify";
+import { FaEye } from "react-icons/fa";
+import { FaEyeSlash } from "react-icons/fa6";
 
 const Register = () => {
   const [name, setName] = useState("");
@@ -12,6 +14,9 @@ const Register = () => {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [phone, setPhone] = useState("");
   const [adress, setAdress] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+
 
   const navigate = useNavigate();
 
@@ -61,7 +66,7 @@ const Register = () => {
       lastname,
       email,
       phone,
-      adress,
+      // adress,
       password,
       userWishlist: [],
     };
@@ -129,7 +134,7 @@ const Register = () => {
                 onChange={(e) => setPhone(e.target.value)}
                 required={true}
               />
-              <label className="font-semibold text-sm pb-1 block text-accent-content">
+              {/* <label className="font-semibold text-sm pb-1 block text-accent-content">
                 Adress
               </label>
               <input
@@ -138,27 +143,55 @@ const Register = () => {
                 value={adress}
                 onChange={(e) => setAdress(e.target.value)}
                 required={true}
-              />
-              <label className="font-semibold text-sm pb-1 block text-accent-content">
+              /> */}
+       <label className="font-semibold text-sm pb-1 block text-accent-content">
                 Password
               </label>
-              <input
-                type="password"
-                className="border rounded-lg px-3 py-2 mt-1 mb-5 text-sm w-full"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                required={true}
-              />
+              <div className="relative">
+                <input
+                  type={showPassword ? "text" : "password"}
+                  className="border rounded-lg px-3 py-2 mt-1 mb-5 text-sm w-full"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  required={true}
+                />
+                <button
+                  type="button"
+                  className="absolute top-1/2 right-3 transform -translate-y-1/2 text-[#4a6104] focus:outline-none"
+                  onClick={() => setShowPassword(!showPassword)}
+                >
+                  {showPassword ? (
+                  <FaEyeSlash />
+                  ) : (
+                    <FaEye />
+                  )}
+                </button>
+              </div>
+
               <label className="font-semibold text-sm pb-1 block text-accent-content">
                 Repeat Password
               </label>
-              <input
-                type="password"
-                className="border rounded-lg px-3 py-2 mt-1 mb-5 text-sm w-full"
-                value={confirmPassword}
-                onChange={(e) => setConfirmPassword(e.target.value)}
-                required={true}
-              />
+              <div className="relative">
+                <input
+                  type={showConfirmPassword ? "text" : "password"}
+                  className="border rounded-lg px-3 py-2 mt-1 mb-5 text-sm w-full"
+                  value={confirmPassword}
+                  onChange={(e) => setConfirmPassword(e.target.value)}
+                  required={true}
+                />
+                <button
+                  type="button"
+                  className="absolute top-1/2 right-3 transform -translate-y-1/2 text-[#4a6104] focus:outline-none"
+                  onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+                >
+                  {showConfirmPassword ? (
+                   <FaEyeSlash />
+                  ) : (
+                    <FaEye />
+                  )}
+                </button>
+              </div>
+
               <button
                 type="submit"
                 className="transition duration-200 bg-[#4a6104] hover:bg-[#b6dd40] border-none focus:ring-opacity-50 text-white w-full py-2.5 rounded-lg text-sm shadow-sm hover:shadow-md font-semibold text-center inline-block"

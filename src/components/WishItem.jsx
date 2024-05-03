@@ -7,7 +7,7 @@ import { store } from "../store";
 import { toast } from "react-toastify";
 
 
-const WishItem = ({ item, counter, image }) => {
+const WishItem = ({ item, counter }) => {
     const dispatch = useDispatch();
 
     const removeFromWishlistHandler = async (product) => {
@@ -37,12 +37,7 @@ const WishItem = ({ item, counter, image }) => {
   return (
     <tr className="hover cursor-pointer">
       <th className="text-accent-content">{ counter + 1 }</th>
-      <th className="text-accent-content">  <img
-            className="rounded-t-lg p-2"
-            src={`https://${image}`}
-            alt="product image"
-          /></th>
-
+      
       <td className="text-accent-content">{ item.title }</td>
       <td className="text-accent-content">{ item.selectedSize }</td>
       <td>

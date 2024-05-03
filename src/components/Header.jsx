@@ -248,9 +248,32 @@ const Header = () => {
           <input id="my-drawer" type="checkbox" className="drawer-toggle" />
           <div className="drawer-content">
             {/* Page content here */}
-            <label htmlFor="my-drawer" className="btn drawer-button">
+            <ul className="menu grid grid-cols-4">
+
+            <li className="text-lg">
+                <NavLink className="text-accent-content" to="/">
+                  Home
+                </NavLink>
+              </li>
+              <li className="text-lg">
+                <NavLink className="text-accent-content" to="/shop">
+                  Shop
+                </NavLink>
+              </li>
+              <li className="text-lg">
+                <NavLink className="text-accent-content" to="/about-us">
+                  About
+                </NavLink>
+              </li>
+              <li className="text-lg">
+                <NavLink className="text-accent-content" to="/contact">
+                  Contact
+                </NavLink>
+              </li>
+            </ul>
+            {/* <label htmlFor="my-drawer" className="btn drawer-button">
               <HiMiniBars3BottomLeft className="text-4xl" />
-            </label>
+            </label> */}
           </div>
           <div className="drawer-side z-10">
             <label
