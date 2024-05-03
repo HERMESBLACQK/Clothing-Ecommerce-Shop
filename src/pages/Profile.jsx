@@ -9,8 +9,7 @@ const Profile = () => {
   const [id, setId] = useState(localStorage.getItem("id"));
   const [userData, setUserData] = useState({});
   const loginState = useSelector((state) => state.auth.isLoggedIn);
-  const [profileImage, setProfileImage] = useState(null);
-
+  
   const [userFormData, setUserFormData] = useState({
     id: "",
     name: "",
@@ -174,31 +173,7 @@ const Profile = () => {
       toast.error("Error updating address");
     }
   };
-  const uploadProfileImage = async () => {
-  try {
-    const formData = new FormData();
-    formData.append("profileImage", profileImage);
-
-    // Send a POST request to upload the profile image
-    const response = await axios.post(
-      // `http://localhost:8080/uploadProfileImage`,
-      `https://json-server-main-yeqa.onrender.com/uploadProfileImage`,
-      formData,
-      {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
-      }
-    );
-
-    console.log("Profile Image Uploaded:", response.data);
-    toast.success("Profile image uploaded successfully");
-  } catch (error) {
-    console.error("Error uploading profile image:", error);
-    toast.error("Error uploading profile image");
-  }
-};
-
+  
   
   
 
@@ -317,17 +292,6 @@ const Profile = () => {
                 })
               }
             />
-          </div>
-          <div className="form-control w-full lg:max-w-xs">
-          <input
-  type="file"
-  accept="image/*"
-  onChange={(e) => setProfileImage(e.target.files[0])}
-/>
-<button className="btn bg-[#4a6104] hover:bg-[#b6dd40] border-none text-white mt-3" onClick={uploadProfileImage}>
-  Upload Profile Image
-</button>
-
           </div>
      
         </div>

@@ -115,7 +115,7 @@ const Shop = () => {
       <div className="max-w-7xl mx-auto pt-5  flex max-md:block bgc">
         <Filters  />
         {productLoaderData.productsData.length === 0 && <h2 className="text-accent-content text-center text-4xl my-10">No products found for this filter</h2>}
-        <div className="grid grid-cols-3 px-2 gap-y-4 max-lg:grid-cols-3 max-md:grid-cols-2 max-sm:grid-cols-1 shop-products-grid">
+        <div className="grid grid-cols-3 px-2 gap-y-4 max-lg:grid-cols-3 max-md:grid-cols-2 max-sm:grid-cols-2 shop-products-grid">
           
           {productLoaderData.productsData.length !== 0 &&
             productLoaderData.productsData.map((product) => (

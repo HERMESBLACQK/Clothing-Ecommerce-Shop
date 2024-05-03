@@ -270,7 +270,22 @@ const Header = () => {
                   Contact
                 </NavLink>
               </li>
+              {!isLoggedIn && (
+                <>
+                  <li className="text-lg">
+                    <NavLink className="text-accent-content" to="/login">
+                      Login
+                    </NavLink>
+                  </li>
+                  <li className="text-lg">
+                    <NavLink className="text-accent-content" to="/register">
+                      Register
+                    </NavLink>
+                  </li>
+                </>
+              )}
             </ul>
+
             {/* <label htmlFor="my-drawer" className="btn drawer-button">
               <HiMiniBars3BottomLeft className="text-4xl" />
             </label> */}

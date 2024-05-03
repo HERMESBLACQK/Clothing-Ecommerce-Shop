@@ -68,7 +68,7 @@ const ProductElement = ({ id, title, image, rating, price, brandName }) => {
   };
 
   return (
-    <div className="max-w-xl ">
+    <div className="max-w-xl">
       <div className="shadow-md rounded-lg max-w-sm bg-base-100 w-11/12 ">
         <Link to={`/shop/product/${id}`} onClick={() => window.scrollTo(0, 0)}>
           <img
@@ -81,10 +81,10 @@ const ProductElement = ({ id, title, image, rating, price, brandName }) => {
           <div className=" flex p-0">
 
           <Link to={`/shop/product/${id}`} onClick={() => window.scrollTo(0, 0)}>
-            <h3 className="font-semibold w-[97%] text-lg leading-6 tracking-tight mb-5 text-accent-content">
-              {title}
-            </h3>
-          </Link>
+              <h3 className="font-semibold w-[97%] text-lg leading-6 tracking-tight mb-5 text-accent-content max-sm:text-sm">
+                {title.split(" ").slice(0, 4).join(" ")} {/* Display only first four words of the title */}
+              </h3>
+            </Link>
           {product.isInWishList ? (
               <button
                 className="btn-sm rounded-[50%] bg-[#4a6104] bg-opacity-70 hover:text-red-400 text-red-400 text-lg p-2"
@@ -117,10 +117,10 @@ const ProductElement = ({ id, title, image, rating, price, brandName }) => {
           </div>
       
           <div className="text-left flex items-start justify-between">
-            <span className="text-2xl font-bold tracking-tight text-[#4a6104]">${price}</span>
+            <span className="text-2xl font-bold tracking-tight text-[#4a6104] max-sm:text-lg">${price}</span>
          
             <button
-              className="btn rounded-xl btnbg hover:bg-[#b6dd40] text-white"
+              className="btn rounded-xl btnbg hover:bg-[#b6dd40] text-white max-sm:btn-sm"
               onClick={() => {
                 if (loginState) {
                   dispatch(addToCart(product));
@@ -130,7 +130,7 @@ const ProductElement = ({ id, title, image, rating, price, brandName }) => {
                 }
               }}
             >
-              <FaCartShopping className="" />  Add to cart
+              <FaCartShopping className="" /> <span className="max-sm:hidden"> Add to cart</span>
               
             </button>
       
