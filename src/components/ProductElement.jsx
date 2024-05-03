@@ -61,7 +61,7 @@ const ProductElement = ({ id, title, image, rating, price, brandName }) => {
       await axios.put(`https://json-server-main-yeqa.onrender.com/user/${localStorage.getItem("id")}`, userObj);
       
       store.dispatch(removeFromWishlist({ userObj }));
-      toast.success("Product removed from the wishlist!");
+      // toast.success("Product removed from the wishlist!");
     } catch (error) {
       console.error(error);
     }
@@ -124,7 +124,7 @@ const ProductElement = ({ id, title, image, rating, price, brandName }) => {
               onClick={() => {
                 if (loginState) {
                   dispatch(addToCart(product));
-                  toast.success("Product added to the cart!");
+                  // toast.success("Product added to the cart!");
                 } else {
                   toast.error("You must be logged in to add products to the cart");
                 }
