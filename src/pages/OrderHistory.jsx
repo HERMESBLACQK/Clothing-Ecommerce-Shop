@@ -32,7 +32,7 @@ const OrderHistory = () => {
   const cancelOrder = async (orderId) => {
     try {
       // await axios.put(`http://localhost:8080/orders/${orderId}`, {
-      await axios.put(`https://json-server-main-yeqa.onrender.com/${orderId}`, {
+      await axios.put(`https://json-server-main-yeqa.onrender.com/orders/${orderId}`, {
         orderStatus: "cancelled",
       });
       toast.success("Order cancelled successfully!");

@@ -8,9 +8,12 @@ const CartItemsList = () => {
 
   return (
     <>
+    <div className="p-1">
+
       {cartItems.map((item) => {
         return <CartItem key={item.id} cartItem={item} />;
       })}
+    </div>
     </>
   )
 }

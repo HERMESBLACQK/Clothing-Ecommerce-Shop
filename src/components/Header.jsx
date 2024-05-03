@@ -10,12 +10,13 @@ import { FaMoon } from "react-icons/fa";
 import { FaWindowClose } from "react-icons/fa";
 
 import "../styles/Header.css";
-import "../index.css"
+import "../index.css";
 import { useDispatch, useSelector } from "react-redux";
 import { changeMode } from "../features/auth/authSlice";
 import { store } from "../store";
 import axios from "axios";
 import { clearWishlist, updateWishlist } from "../features/wishlist/wishlistSlice";
+import { removeItem, updateCartAmount } from "../features/cart/cartSlice";
 
 const Header = () => {
   const { amount } = useSelector((state) => state.cart);
@@ -24,7 +25,7 @@ const Header = () => {
   const [id, setId] = useState(localStorage.getItem("id"));
   const dispatch = useDispatch();
   const { darkMode } = useSelector((state) => state.auth);
-  const cartItems = useSelector((state) => state.cart.cartItems); // New
+  const cartItems = useSelector((state) => state.cart.cartItems);
 
   const loginState = useSelector((state) => state.auth.isLoggedIn);
 
@@ -32,7 +33,6 @@ const Header = () => {
     if (loginState) {
       try {
         const getResponse = await axios.get(
-          // `http://localhost:8080/user/${localStorage.getItem("id")}`
           `https://json-server-main-yeqa.onrender.com/user/${localStorage.getItem("id")}`
         );
         const userObj = getResponse.data;
@@ -52,13 +52,27 @@ const Header = () => {
     fetchWishlist();
   }, [loginState]);
 
+  const increaseAmount = (itemId) => {
+    dispatch(updateCartAmount({ id: itemId, amount: 1 }));
+  };
+
+  const decreaseAmount = (itemId, currentAmount) => {
+    if (currentAmount > 1) {
+      dispatch(updateCartAmount({ id: itemId, amount: -1 }));
+    }
+  };
+
+  const removeFromCart = (itemId) => {
+    dispatch(removeItem(itemId));
+  };
+
   return (
     <>
       <div className="navbar  mx-auto bgc">
         <div className="flex-1">
           <Link
             to="/"
-            className="btn btn-ghost normal-case text-2xl text-accent-content italic font-semibold"
+            className="btn btn-ghost normal-case text-2xl text-accent-content italic font-semibold max-sm:text-lg"
           >
             <AiFillShopping />
             CABS STORE
@@ -102,7 +116,7 @@ const Header = () => {
           >
             <FaHeart className="text-xl" />
           </Link> */}
-          <div className="dropdown dropdown-end">
+          <div className="dropdown dropdown-end cart">
             <label tabIndex={0} className="btn btn-ghost btn-circle">
               <div className="indicator ">
                 <span className=" rounded-md p-1 absolute bottom-3 left-2 float-left text-l font-bold">  {amount}</span>
@@ -123,26 +137,76 @@ const Header = () => {
               </div>
             </label>
             <div
-              tabIndex={0}
-              className="mt-3 z-[1] card card-compact dropdown-content w-52 bg-base-100 shadow"
-            >
-              <div className="card-body">
-                <span className="font-bold text-lg text-accent-content">
-                  {amount} Items
-                </span>
-                <span className="text-[#b6dd40] ">
-                  Subtotal: ${total.toFixed(2)}
-                </span>
-                <div className="card-actions">
-                  <Link
-                    to="/cart"
-                    className="btn bg-[#4a6104] btn-block text-white hover:bg-[#b6dd40] "
-                  >
-                    View cart
-                  </Link>
-                </div>
-              </div>
+    tabIndex={0}
+    className="mt-3 z-[1] card card-compact dropdown-content w-96 h-96 max-md:left-[-150px] max-md:w-60 bg-base-100 shadow"
+  >
+    <div className="card-body">
+      <span className="font-bold text-lg text-accent-content">
+        {amount} Items
+      </span>
+    
+      {/* Cart Items */}
+      <div className=" h-52 overflow-y-scroll">
+        
+      <div className="mt-3">
+        {cartItems.map((item) => (
+          <div key={item.id} className=" items-center justify-between mb-2 shadow-lg rounded-md p-1">
+            {/* Item Image */}
+            <div className=" flex items-center justify-between mb-2">
+
+            <img src={`https://${item.image}`} alt={item.title} className="w-10" />
+            {/* Item Details */}
+            <div className="flex-1 ml-3">
+              <h4 className="text-sm font-semibold text-accent-content">{item.title}</h4>
+              <p className="text-xs text-[#4a6104] font-bold">${item.price.toFixed(2)} x {item.amount}</p>
             </div>
+            </div>
+            {/* Increase Amount Button */}
+            <div className="flex justify-between">
+          <div className="">
+
+          <button
+                          className="btn btn-sm btn-outline btn-circle mr-2"
+                          onClick={() => increaseAmount(item.id)}
+                        >
+                          +
+                        </button>
+            {/* Decrease Amount Button */}
+            <button
+                          className="btn btn-sm btn-outline btn-circle mr-2"
+                          onClick={() => decreaseAmount(item.id)}
+                        >
+                          -
+                        </button>
+          </div>
+            {/* Cancel Button */}
+            <button
+                          className="p-1 rounded-md btn-error hover:text-warning"
+                          onClick={(e) => {
+                            e.stopPropagation(); // Prevents the parent div from closing
+                            removeFromCart(item.id);
+                          }}
+                        >
+                          Cancel
+                        </button>
+            </div>
+          </div>
+        ))}
+      </div>
+      </div>
+      <span className="text-[#4a6104] font-bold">
+        Subtotal: ${total.toFixed(2)}
+      </span>
+      <div className="card-actions">
+        <Link
+          to="/cart"
+          className="btn bg-[#4a6104] btn-block text-white hover:bg-[#b6dd40]"
+        >
+          View cart
+        </Link>
+      </div>
+    </div>
+  </div>
           </div>
           {isLoggedIn && (
             <div className="dropdown dropdown-end ">

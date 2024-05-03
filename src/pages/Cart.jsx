@@ -22,7 +22,7 @@ const Cart = () => {
     <>
     <SectionTitle title="Cart" path="Home | Cart" />
     <div className='mt-8 grid gap-8 lg:grid-cols-12 max-w-7xl mx-auto px-10'>
-        <div className='lg:col-span-8'>
+        <div className='lg:col-span-8  h-[500px] overflow-y-scroll'>
           <CartItemsList />
         </div>
         <div className='lg:col-span-4 lg:pl-4'>
