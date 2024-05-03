@@ -183,7 +183,6 @@ const Header = () => {
             <button
                           className="p-1 rounded-md btn-error hover:text-warning"
                           onClick={(e) => {
-                            e.stopPropagation(); // Prevents the parent div from closing
                             removeFromCart(item.id);
                           }}
                         >
