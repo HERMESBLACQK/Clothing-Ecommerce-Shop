@@ -29,13 +29,15 @@ const ProductElement = ({ id, title, image, rating, price, brandName }) => {
 
   const addToWishlistHandler = async (product) => {
     try {
-      const response = await axios.get(`http://localhost:8080/user/${localStorage.getItem("id")}`);
+      // const response = await axios.get(`http://localhost:8080/user/${localStorage.getItem("id")}`);
+      const response = await axios.get(`https://json-server-main-yeqa.onrender.com/user/${localStorage.getItem("id")}`);
       const userObj = response.data;
       
       userObj.userWishlist = userObj.userWishlist || [];
       userObj.userWishlist.push(product);
 
-      await axios.put(`http://localhost:8080/user/${localStorage.getItem("id")}`, userObj);
+      // await axios.put(`http://localhost:8080/user/${localStorage.getItem("id")}`, userObj);
+      await axios.put(`https://json-server-main-yeqa.onrender.com/user/${localStorage.getItem("id")}`, userObj);
       
       store.dispatch(updateWishlist({ userObj }));
       toast.success("Product added to the wishlist!");
@@ -47,14 +49,16 @@ const ProductElement = ({ id, title, image, rating, price, brandName }) => {
 
   const removeFromWishlistHandler = async (product) => {
     try {
-      const response = await axios.get(`http://localhost:8080/user/${localStorage.getItem("id")}`);
+      // const response = await axios.get(`http://localhost:8080/user/${localStorage.getItem("id")}`);
+      const response = await axios.get(`https://json-server-main-yeqa.onrender.com/user/${localStorage.getItem("id")}`);
       const userObj = response.data;
 
       userObj.userWishlist = userObj.userWishlist || [];
       const newWishlist = userObj.userWishlist.filter((item) => item.id !== product.id);
       userObj.userWishlist = newWishlist;
 
-      await axios.put(`http://localhost:8080/user/${localStorage.getItem("id")}`, userObj);
+      // await axios.put(`http://localhost:8080/user/${localStorage.getItem("id")}`, userObj);
+      await axios.put(`https://json-server-main-yeqa.onrender.com/user/${localStorage.getItem("id")}`, userObj);
       
       store.dispatch(removeFromWishlist({ userObj }));
       toast.success("Product removed from the wishlist!");

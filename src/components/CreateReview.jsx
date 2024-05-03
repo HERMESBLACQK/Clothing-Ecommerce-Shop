@@ -15,7 +15,8 @@ const CreateReview = ({ addReview }) => {
     const fetchProductData = async () => {
       try {
         // Fetch product data from db.json or your backend API
-        const response = await axios.get("http://localhost:8080/products"); // Adjust URL based on your API endpoint
+        // const response = await axios.get("http://localhost:8080/products"); // Adjust URL based on your API endpoint
+        const response = await axios.get("https://json-server-main-yeqa.onrender.com/products"); // Adjust URL based on your API endpoint
         const products = response.data?.products || [];
 
         // Check if products array is not empty and set the product ID
@@ -43,7 +44,8 @@ const CreateReview = ({ addReview }) => {
         const userId = localStorage.getItem("id");
 
         // Fetch logged-in user details from db.json or your backend API
-        const userResponse = await axios.get(`http://localhost:8080/user/${userId}`); // Adjust URL based on your API endpoint
+        // const userResponse = await axios.get(`http://localhost:8080/user/${userId}`); // Adjust URL based on your API endpoint
+        const userResponse = await axios.get(`https://json-server-main-yeqa.onrender.com/user/${userId}`); // Adjust URL based on your API endpoint
         const user = userResponse.data;
 
         // Create the new review object

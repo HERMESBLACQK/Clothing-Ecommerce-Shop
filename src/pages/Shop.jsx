@@ -56,7 +56,8 @@ export const shopLoader = async ({ request }) => {
 
   try {
     const response = await axios(
-      `http://localhost:8080/products${parameter}`
+      // `http://localhost:8080/products${parameter}`
+      `https://json-server-main-yeqa.onrender.com/products${parameter}`
 
     );
     let data = response.data;

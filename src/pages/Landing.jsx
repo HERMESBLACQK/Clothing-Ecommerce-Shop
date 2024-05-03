@@ -7,7 +7,8 @@ import axios from "axios";
 
 export const landingLoader = async () => {
   const response = await axios(
-    `http://localhost:8080/products?_page=1&_limit=12`
+    `https://json-server-main-yeqa.onrender.com/products?_page=1&_limit=12`
+    // `http://localhost:8080/products?_page=1&_limit=12`
   );
   const data = response.data;
 

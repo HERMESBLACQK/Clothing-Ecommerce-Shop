@@ -40,7 +40,8 @@ const Profile = () => {
 
   const getUserData = async () => {
     try {
-      const response = await axios(`http://localhost:8080/user/${id}`);
+      // const response = await axios(`http://localhost:8080/user/${id}`);
+      const response = await axios(`https://json-server-main-yeqa.onrender.com/user/${id}`);
       const data = response.data;
       setUserFormData({
         name: data.name,
@@ -78,7 +79,8 @@ const Profile = () => {
   const updateProfile = async (e) => {
     e.preventDefault();
     try {
-      const getResponse = await axios(`http://localhost:8080/user/${id}`);
+      // const getResponse = await axios(`http://localhost:8080/user/${id}`);
+      const getResponse = await axios(`https://json-server-main-yeqa.onrender.com/user/${id}`);
       const userObj = getResponse.data;
 
       if (userFormData.password !== userObj.password) {
@@ -105,7 +107,8 @@ const Profile = () => {
       }
 
       const putResponse = await axios.put(
-        `http://localhost:8080/user/${id}`,
+        // `http://localhost:8080/user/${id}`,
+        `https://json-server-main-yeqa.onrender.com/user/${id}`,
         {
           id: id,
           name: userFormData.name,
@@ -142,7 +145,8 @@ const Profile = () => {
       }
   
       // Send PATCH request to update the selected address
-      const response = await axios.patch(`http://localhost:8080/user/${id}`, {
+      // const response = await axios.patch(`http://localhost:8080/user/${id}`, {
+      const response = await axios.patch(`https://json-server-main-yeqa.onrender.com/${id}`, {
         [selectedAddress]: updatedAddress, // Dynamically set the address field to update based on selectedAddress
       });
   

@@ -67,7 +67,8 @@ const Register = () => {
     };
 
     if (isValidate()) {
-      fetch("http://localhost:8080/user", {
+      // fetch("http://localhost:8080/user", {
+      fetch("https://json-server-main-yeqa.onrender.com/user", {
         method: "POST",
         headers: { "content-type": "application/json" },
         body: JSON.stringify(regObj),

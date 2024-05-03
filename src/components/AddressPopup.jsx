@@ -8,7 +8,8 @@ const AddressPopup = ({ onSelectAddress }) => {
   useEffect(() => {
     const fetchAddresses = async () => {
       try {
-        const response = await axios.get('http://localhost:8080/addresses'); // Assuming this endpoint fetches addresses from db.json
+        // const response = await axios.get('http://localhost:8080/addresses'); // Assuming this endpoint fetches addresses from db.json
+        const response = await axios.get('https://json-server-main-yeqa.onrender.com/addresses'); // Assuming this endpoint fetches addresses from db.json
         setAddresses(response.data);
       } catch (error) {
         console.error('Error fetching addresses:', error);

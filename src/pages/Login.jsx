@@ -36,7 +36,8 @@ const Login = () => {
   const proceedLogin = (e) => {
     e.preventDefault();
     if (isValidate()) {
-      fetch("http://localhost:8080/user")
+      // fetch("http://localhost:8080/user")
+      fetch("https://json-server-main-yeqa.onrender.com/user")
         .then((res) => res.json())
         .then((res) => {
           let data = res;

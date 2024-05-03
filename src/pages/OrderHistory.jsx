@@ -18,7 +18,8 @@ const OrderHistory = () => {
 
   const getOrderHistory = async () => {
     try {
-      const response = await axios.get("http://localhost:8080/orders");
+      // const response = await axios.get("http://localhost:8080/orders");
+      const response = await axios.get("https://json-server-main-yeqa.onrender.com/orders");
       const data = response.data;
       setOrders(
         data.filter((order) => order.userId === localStorage.getItem("id"))
@@ -30,7 +31,8 @@ const OrderHistory = () => {
 
   const cancelOrder = async (orderId) => {
     try {
-      await axios.put(`http://localhost:8080/orders/${orderId}`, {
+      // await axios.put(`http://localhost:8080/orders/${orderId}`, {
+      await axios.put(`https://json-server-main-yeqa.onrender.com/${orderId}`, {
         orderStatus: "cancelled",
       });
       toast.success("Order cancelled successfully!");
@@ -65,7 +67,7 @@ const OrderHistory = () => {
   return (
     <>
       <SectionTitle title="Order History" path="Home | Order History" />
-      <div className="order-history-main max-w-7xl mx-auto mt-10 px-20 max-md:px-4 border">
+      <div className="order-history-main max-w-7xl mx-auto mt-10 px-20 max-md:px-4 ">
         {orders?.length === 0 ? (
           <div className="text-center">
             <h1 className="text-4xl text-accent-content">

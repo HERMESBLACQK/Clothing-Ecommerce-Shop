@@ -32,7 +32,8 @@ const Header = () => {
     if (loginState) {
       try {
         const getResponse = await axios.get(
-          `http://localhost:8080/user/${localStorage.getItem("id")}`
+          // `http://localhost:8080/user/${localStorage.getItem("id")}`
+          `https://json-server-main-yeqa.onrender.com/user/${localStorage.getItem("id")}`
         );
         const userObj = getResponse.data;
 

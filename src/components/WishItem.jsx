@@ -12,7 +12,8 @@ const WishItem = ({ item, counter }) => {
 
     const removeFromWishlistHandler = async (product) => {
       const getResponse = await axios.get(
-        `http://localhost:8080/user/${localStorage.getItem("id")}`
+        // `http://localhost:8080/user/${localStorage.getItem("id")}`
+        `https://json-server-main-yeqa.onrender.com/user/${localStorage.getItem("id")}`
       );
       const userObj = getResponse.data;
   
@@ -23,7 +24,8 @@ const WishItem = ({ item, counter }) => {
       userObj.userWishlist = newWishlist;
   
       const postResponse = await axios.put(
-        `http://localhost:8080/user/${localStorage.getItem("id")}`,
+        // `http://localhost:8080/user/${localStorage.getItem("id")}`,
+        `https://json-server-main-yeqa.onrender.com/user/${localStorage.getItem("id")}`,
         userObj
       );
   

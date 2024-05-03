@@ -17,7 +17,8 @@ const EditAddressPopup = ({ isOpen, onClose, onSave, initialValues }) => {
       }
 
       // Update the address in the database using PATCH request
-      await axios.patch(`http://localhost:8080/user/${formData.id}`, {
+      // await axios.patch(`http://localhost:8080/user/${formData.id}`, {
+      await axios.patch(`https://json-server-main-yeqa.onrender.com/user/${formData.id}`, {
         street: formData.street,
         region: formData.region,
         state: formData.state,
