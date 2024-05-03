@@ -84,24 +84,24 @@ const Header = () => {
               />
             </svg>
           </Link>
-          <button
+          {/* <button
             className="text-accent-content btn btn-ghost btn-circle text-xl"
             onClick={() => dispatch(changeMode())}
           >
             {darkMode ? <FaSun /> : <FaMoon />}
-          </button>
+          </button> */}
           <Link
             to="/wishlist"
             className="btn btn-ghost btn-circle text-accent-content"
           >
             <FaHeart className="text-xl" />
           </Link>
-          <Link
+          {/* <Link
             to="/Orders"
             className="btn btn-ghost btn-circle text-accent-content"
           >
             <FaHeart className="text-xl" />
-          </Link>
+          </Link> */}
           <div className="dropdown dropdown-end">
             <label tabIndex={0} className="btn btn-ghost btn-circle">
               <div className="indicator ">
