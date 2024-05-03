@@ -1,0 +1,42 @@
+/* styles.css */
+
+/* Default styles for the span element */
+.status-span {
+          display: inline-block;
+          padding: 0.25rem 0.5rem;
+          border-radius: 0.25rem;
+        }
+        
+        /* Styles for Pending status */
+        .status-pending {
+          background-color: #ffc107; /* yellow */
+          color: #000; /* black */
+        }
+        
+        /* Styles for Processing status */
+        .status-processing {
+          background-color: #007bff; /* blue */
+          color: #fff; /* white */
+        }
+        
+        /* Styles for Shipped status */
+        .status-shipped {
+          background-color: #28a745; /* green */
+          color: #fff; /* white */
+        }
+        
+        /* Styles for Delivered status */
+        .status-delivered {
+          background-color: #17a2b8; /* cyan */
+          color: #fff; /* white */
+        }
+        
+        /* Styles for Cancelled status */
+        .status-cancelled {
+          background-color: #ff8793; /* red */
+          color: red; /* white */
+        }
+        tr{
+          border: 2px solid red;
+        }
+        

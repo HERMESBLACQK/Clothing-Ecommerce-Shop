@@ -1,0 +1,13 @@
+.line-container {
+          width : 30px;
+          height : 100px;
+          display : flex;
+          justify-content : center;
+      }
+      
+      .line {
+          height : 0;
+          width : 0;
+          background-color : blue;
+          transition : "2s";
+      }

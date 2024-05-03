@@ -1,0 +1,39 @@
+.box-container {
+          width : 30px;
+          height : 30px;
+          background-color : blue;
+          display : flex;
+          position : relative;
+          position : relative;
+      }
+      
+      .tick {
+          /* position : absolute; */
+          /* top : 50%; */
+          /* left : 50%; */
+          /* transform : translateX(-50%) translateY(-50%); */
+          margin : auto;
+          display: flex;
+          width : 60%;
+          height : 30%;
+          align-items : flex-end;
+          flex-wrap : nowrap;
+          transform : rotate(-45deg);
+          position : absolute;
+          left : 20%;
+          top : 25%;
+      }
+      
+      .tick
+      :first-child {
+          width : 15%;
+          height : 100%;
+          background-color : white;
+      }
+      
+      .tick
+      :last-child {
+          width : 85%;
+          height : 30%;
+          background-color : white;
+      }
