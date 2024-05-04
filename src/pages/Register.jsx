@@ -13,7 +13,7 @@ const Register = () => {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [phone, setPhone] = useState("");
-  const [adress, setAdress] = useState("");
+
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
@@ -36,10 +36,8 @@ const Register = () => {
     } else if (phone.length < 4) {
       isProceed = false;
       errorMessage = "Phone must be longer than 3 characters";
-    } else if (adress.length < 4) {
-      isProceed = false;
-      errorMessage = "Adress must be longer than 3 characters";
-    } else if (password.length < 6) {
+    } 
+     else if (password.length < 6) {
       isProceed = false;
       errorMessage = "Please enter a password longer than 5 characters";
     } else if (confirmPassword.length < 6) {

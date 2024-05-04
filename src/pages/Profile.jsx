@@ -4,6 +4,7 @@ import { useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import SectionTitle from "../components/SectionTitle";
+import AddressSave from "../components/AddressSave";
 
 const Profile = () => {
   const [id, setId] = useState(localStorage.getItem("id"));
@@ -16,32 +17,15 @@ const Profile = () => {
     lastname: "",
     email: "",
     phone: "",
-    address1: {
-      street: "",
-      region: "",
-      state: "",
-    },
-    address2: {
-      street: "",
-      region: "",
-      state: "",
-    },
     password: "",
     newPassword: "",
     confirmNewPassword: "",
   });
   const navigate = useNavigate();
   const [editPopupOpen, setEditPopupOpen] = useState(false); // State to manage the edit popup
-  const [editedAddress, setEditedAddress] = useState({
-    street: "",
-    region: "",
-    state: "",
-  }); // State to hold the edited address
-  const [selectedAddress, setSelectedAddress] = useState(""); // State to manage the selected address
 
   const getUserData = async () => {
     try {
-      // const response = await axios(`http://localhost:8080/user/${id}`);
       const response = await axios(`https://json-server-main-yeqa.onrender.com/user/${id}`);
       const data = response.data;
       setUserFormData({
@@ -49,16 +33,6 @@ const Profile = () => {
         lastname: data.lastname,
         email: data.email,
         phone: data.phone,
-        address1: {
-          street: data.address1?.street || "",
-          region: data.address1?.region || "",
-          state: data.address1?.state || "",
-        },
-        address2: {
-          street: data.address2?.street || "",
-          region: data.address2?.region || "",
-          state: data.address2?.state || "",
-        },
         password: "",
         newPassword: "",
         confirmNewPassword: "",
@@ -77,10 +51,10 @@ const Profile = () => {
       navigate("/");
     }
   }, []);
+
   const updateProfile = async (e) => {
     e.preventDefault();
     try {
-      // const getResponse = await axios(`http://localhost:8080/user/${id}`);
       const getResponse = await axios(`https://json-server-main-yeqa.onrender.com/user/${id}`);
       const userObj = getResponse.data;
 
@@ -108,7 +82,6 @@ const Profile = () => {
       }
 
       const putResponse = await axios.put(
-        // `http://localhost:8080/user/${id}`,
         `https://json-server-main-yeqa.onrender.com/user/${id}`,
         {
           id: id,
@@ -116,8 +89,6 @@ const Profile = () => {
           lastname: userFormData.lastname,
           email: userFormData.email,
           phone: userFormData.phone,
-          address1: userFormData.address1,
-          address2: userFormData.address2,
           password: userFormData.newPassword,
           userWishlist: await userObj.userWishlist,
         }
@@ -128,54 +99,6 @@ const Profile = () => {
       console.log(error.response);
     }
   };
-
-
-  const handleAddressEdit = async () => {
-    try {
-      let updatedAddress = {}; // Initialize an empty object to store the updated address
-  
-      if (selectedAddress === "address1") {
-        // If editing address1
-        updatedAddress = { ...userData.address1, ...editedAddress };
-      } else if (selectedAddress === "address2") {
-        // If editing address2
-        updatedAddress = { ...userData.address2, ...editedAddress };
-      } else {
-        // Handle invalid selection or default to address1
-        updatedAddress = { ...userData.address1, ...editedAddress };
-      }
-  
-      // Send PATCH request to update the selected address
-      // const response = await axios.patch(`http://localhost:8080/user/${id}`, {
-      const response = await axios.patch(`https://json-server-main-yeqa.onrender.com/${id}`, {
-        [selectedAddress]: updatedAddress, // Dynamically set the address field to update based on selectedAddress
-      });
-  
-      console.log("Updated Address Details:", response.data); // Log the updated address details
-  
-      // Update local user data after successful update
-      const updatedUserData = {
-        ...userData,
-        [selectedAddress]: { ...userData[selectedAddress], ...editedAddress },
-      };
-      setUserData(updatedUserData);
-  
-      const updatedUserFormData = {
-        ...userFormData,
-        [selectedAddress]: { ...userFormData[selectedAddress], ...editedAddress },
-      };
-      setUserFormData(updatedUserFormData);
-  
-      toast.success("Address updated successfully");
-      setEditPopupOpen(false); // Close the edit popup
-    } catch (error) {
-      console.error("Error updating address:", error);
-      toast.error("Error updating address");
-    }
-  };
-  
-  
-  
 
   return (
     <>
@@ -234,31 +157,18 @@ const Profile = () => {
             />
           </div>
 
-          {/* <div className="form-control w-full lg:max-w-xs">
+          <div className="form-control w-full lg:max-w-xs">
             <label className="label">
-              <span className="label-text">Your Adress</span>
+              <span className="label-text">Your Old Password</span>
             </label>
             <input
-              type="text"
+              type="password"
               placeholder="Type here"
               className="input input-bordered w-full lg:max-w-xs"
-              value={userFormData.adress}
-              onChange={(e) => {setUserFormData({...userFormData, address1: e.target.value})}}
+              value={userFormData.password}
+              onChange={(e) => setUserFormData({ ...userFormData, password: e.target.value })}
             />
-          </div> */}
-
-<div className="form-control w-full lg:max-w-xs">
-  <label className="label">
-    <span className="label-text">Your Old Password</span>
-  </label>
-  <input
-    type="password"
-    placeholder="Type here"
-    className="input input-bordered w-full lg:max-w-xs"
-    value={userFormData.password}
-    onChange={(e) => setUserFormData({ ...userFormData, password: e.target.value })}
-  />
-</div>
+          </div>
 
           {/* New Password */}
           <div className="form-control w-full lg:max-w-xs">
@@ -302,90 +212,11 @@ const Profile = () => {
           Update Profile
         </button>
       </form>
+      <div className="border grid grid-cols-2 max-lg:grid-cols-1 mt-10 m-auto w-[50%] max-sm:w-[75%] gap-3">
 
-      <div className="grid grid-cols-2 max-lg:grid-cols-1 mt-10 m-auto w-[50%] gap-3">
-        <div className="form-control w-full lg:max-w-xs border p-2 rounded-md bg-base-200">
-          <h2 className="text-center font-semibold">Address 1</h2>
-          <p className="italic font-semibold">Street: {userData.address1?.street}</p>
-          <p className="text-lg italic font-semibold">Region: {userData.address1?.region}</p>
-          <p className="text-lg italic font-semibold">State: {userData.address1?.state}</p>
-          <button
-            className="border btn-sm w-3/12 bg-[#4a6104] hover:bg-[#b6dd40] border-none text-white font-semibold rounded-md "
-            onClick={() => {
-              setEditedAddress({ ...userData.address1 }); // Set the edited address
-              setEditPopupOpen(true); // Open the edit popup
-            }}
-          >
-            Edit
-          </button>
-        </div>
-        <div className="form-control w-full lg:max-w-xs border p-2 rounded-md bg-base-200">
-          <h2 className="text-center font-semibold">Address 2</h2>
-          <p className="italic font-semibold">Street: {userData.address2?.street}</p>
-          <p className="text-lg italic font-semibold">Region: {userData.address2?.region}</p>
-          <p className="text-lg italic font-semibold">State: {userData.address2?.state}</p>
-          <button
-            className="border btn-sm w-3/12 bg-[#4a6104] hover:bg-[#b6dd40] border-none text-white font-semibold rounded-md "
-            onClick={() => {
-              setEditedAddress({ ...userData.address2 }); // Set the edited address
-              setEditPopupOpen(true); // Open the edit popup
-            }}
-          >
-            Edit
-          </button>
-        </div>
+      <AddressSave addressType="address1" />
+      <AddressSave addressType="address2" />
       </div>
-  
-      {/* Edit Address Popup */}
-      {editPopupOpen && (
-        <div className="fixed inset-0 bg-gray-800 bg-opacity-50 flex justify-center items-center">
-          <div className="bg-white p-4 rounded-md">
-            <h2 className="text-lg font-semibold mb-2">Edit Address</h2>
-            <label className="block mb-2">
-              Street:
-              <input
-                type="text"
-                placeholder="Street"
-                className="input input-bordered mb-4"
-                value={editedAddress.street}
-                onChange={(e) =>
-                  setEditedAddress({ ...editedAddress, street: e.target.value })
-                }
-              />
-            </label>
-            <label className="block mb-2">
-              Region:
-              <input
-                type="text"
-                placeholder="Region"
-                className="input input-bordered mb-4"
-                value={editedAddress.region}
-                onChange={(e) =>
-                  setEditedAddress({ ...editedAddress, region: e.target.value })
-                }
-              />
-            </label>
-            <label className="block mb-2">
-              State:
-              <input
-                type="text"
-                placeholder="State"
-                className="input input-bordered mb-4"
-                value={editedAddress.state}
-                onChange={(e) =>
-                  setEditedAddress({ ...editedAddress, state: e.target.value })
-                }
-              />
-            </label>
-            <button
-              className="btn bg-[#4a6104] hover:bg-[#b6dd40] text-white font-semibold"
-              onClick={handleAddressEdit}
-            >
-              Save
-            </button>
-          </div>
-        </div>
-      )}
     </>
   );
 };

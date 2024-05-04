@@ -75,7 +75,7 @@ const Search = () => {
       </form>
       {searchTerm && products.length !== 0 && <h2 className="text-center text-6xl my-10 max-lg:text-4xl max-sm:text-2xl max-sm:my-5 text-accent-content">Showing results for "{searchTerm}"</h2>}
       {products.length === 0 && searchTerm && <h2 className="text-center text-6xl my-10 max-lg:text-4xl max-sm:text-2xl max-sm:my-5 text-accent-content">No results found for "{searchTerm}"</h2>}
-      <div className="grid grid-cols-4 px-2 max-w-7xl mx-auto gap-y-4 max-lg:grid-cols-3 max-md:grid-cols-2 max-sm:grid-cols-1 shop-products-grid">
+      <div className="grid grid-cols-4 px-2 max-w-7xl mx-auto gap-y-4 max-lg:grid-cols-3 max-md:grid-cols-2 max-sm:grid-cols-2 shop-products-grid">
         {products && Array.isArray(products) &&
           products.map((product) => (
             <ProductElement

@@ -127,10 +127,10 @@ const SingleProduct = () => {
         <div className="product-images flex flex-col justify-center max-lg:justify-start">
           <img
             src={`https://${productData?.additionalImageUrls[currentImage]}`}
-            className="w-96 text-center border border-gray-600 cursor-pointer"
+            className="w-96 text-center border border-gray-600 cursor-pointer rounded"
             alt={productData.name}
           />
-          <div className="other-product-images mt-1 grid grid-cols-3 w-96 gap-y-1 gap-x-2 max-sm:grid-cols-2 max-sm:w-64">
+          <div className="other-product-images mt-1 grid grid-cols-3 w-96 gap-y-1 gap-x-2 max-sm:grid-cols-2 max-sm:w-64 rounded">
             {productData?.additionalImageUrls.map((imageObj, index) => (
               <img
                 src={`https://${imageObj}`}
@@ -252,6 +252,7 @@ const SingleProduct = () => {
       </div>
 
       <SingleProductReviews rating={rating} productData={productData} />
+   
     </>
   );
 };
