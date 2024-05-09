@@ -20,10 +20,15 @@
           align-items: center;
         }
         .bgc{
-          background-color:  #b6dd40;
+          background-color:  #ddecb1;
         }
         .btnbg{
           background-color: #4a6104;
+        }
+        .active{
+          background-color: #4a6104;
+          color: white;
+
         }
         
         .loader-circle {

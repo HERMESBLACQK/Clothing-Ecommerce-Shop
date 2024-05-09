@@ -4,6 +4,8 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
 import axios from 'axios';
+import AddressSave from "../components/AddressSave";
+
 
 const Cart = () => {
   const navigate = useNavigate();
@@ -36,7 +38,7 @@ const Cart = () => {
     };
   
     fetchUserAddresses();
-  }, [loginState, userData]);
+  }, [loginState, userData, navigate]);
   
 
   const isCartEmpty = () => {
@@ -61,11 +63,17 @@ const Cart = () => {
             <button onClick={isCartEmpty} className='btn bg-blue-600 hover:bg-blue-500 text-white btn-block mt-8'>
               Order Now
             </button>
+            
           ) : (
             <Link to='/login' className='btn bg-blue-600 hover:bg-blue-500 btn-block text-white mt-8'>
               Please Login
             </Link>
           )}
+           <div className=" grid grid-cols-1 max-lg:grid-cols-1 mt-10 m-auto w-[100%] max-sm:w-[95%] gap-3">
+
+<AddressSave addressType="address1" />
+<AddressSave addressType="address2" />
+</div>
         </div>
       </div>
     </>

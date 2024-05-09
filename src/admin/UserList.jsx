@@ -5,6 +5,8 @@ import { Link } from 'react-router-dom'; // Import Link from react-router-dom
 const UserList = () => {
   const [users, setUsers] = useState([]);
   const [searchQuery, setSearchQuery] = useState('');
+  const [currentPage, setCurrentPage] = useState(1);
+  const usersPerPage = 25;
 
   useEffect(() => {
     const fetchUsers = async () => {
@@ -26,6 +28,7 @@ const UserList = () => {
       user.phone.toLowerCase().includes(searchQuery.toLowerCase())
     );
   });
+  const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
   return (
     <div className=''>
@@ -78,6 +81,22 @@ const UserList = () => {
           ))}
         </tbody>
       </table>
+      <div className="pagination w-7/12 m-auto mt-3">
+        <ul className="pagination-list flex justify-around">
+          {Array.from({ length: Math.ceil(filteredUsers.length / usersPerPage) }, (_, i) => (
+            <li key={i} className="pagination-item  bg-white">
+              <button
+                onClick={() => paginate(i + 1)}
+                className={`pagination-link  p-2 px-4 ${
+                  currentPage === i + 1 ? "active" : ""
+                }`}
+              >
+                {i + 1}
+              </button>
+            </li>
+          ))}
+        </ul>
+      </div>
     </div>
   );
 };
