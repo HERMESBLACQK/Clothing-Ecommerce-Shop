@@ -40,7 +40,7 @@ const SingleProductReviews = ({ rating, productData }) => {
           <SingleReview key={item.id} reviewObj={item} />
         ))}
         {productData?.totalReviewCount > 3 && (
-          <button className="btn bg-[#4a6104] hover:text-black border-none w-full text-white">
+          <button className="btn bg-[#dc0000] hover:text-black border-none w-full text-white mb-2">
             Load more reviews
           </button>
         )}

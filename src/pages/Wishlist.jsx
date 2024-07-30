@@ -9,7 +9,7 @@ const Wishlist = () => {
   return (
     <>
       <SectionTitle title="Wishlist" path="Home | Wishlist" />
-      <div className="max-w-7xl mx-auto">
+      <div className="max-w-7xl mx-auto h-full">
         <div className="overflow-x-auto">
           <table className="table">
             <thead>

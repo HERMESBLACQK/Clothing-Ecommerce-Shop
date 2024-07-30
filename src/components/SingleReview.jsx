@@ -15,7 +15,7 @@ const SingleReview = ({ reviewObj }) => {
   }
 
   return (
-    <article className="mb-10  p-1 px-2 rounded-lg shadow-md">
+    <article className="mb-10  p-1 px-2 rounded-lg shadow-md bg-white">
       <div className="flex items-center mb-4">
         <img
           className="w-10 h-10 me-4 rounded-full"
@@ -25,7 +25,7 @@ const SingleReview = ({ reviewObj }) => {
           }
           alt=""
         />
-        <div className="font-medium dark:text-white">
+        <div className="font-medium ">
           <p>{reviewObj.username}</p>
         </div>
       </div>

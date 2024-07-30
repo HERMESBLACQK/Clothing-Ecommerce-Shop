@@ -104,14 +104,6 @@ const Shop = () => {
   return (
     <>
       <SectionTitle title="Shop" path="Home | Shop" />
-      <div className=" flex justify-center p-2 bgc">
-        {/* Pass props to the TagFilter component */}
-        {/* <TagFilter
-          tags={selectTag}
-          selectedTag={selectedTag}
-          onSelectTag={setSelectedTag}
-        /> */}
-      </div>
       <div className="max-w-7xl mx-auto pt-5  flex max-md:block bgc">
         <Filters  />
         {productLoaderData.productsData.length === 0 && <h2 className="text-accent-content text-center text-4xl my-10">No products found for this filter</h2>}

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { Link } from 'react-router-dom'; // Import Link from react-router-dom
+import { Link } from 'react-router-dom';
+import UserDetails from './UserDetails'; // Import UserDetails component
 
 const UserList = () => {
   const [users, setUsers] = useState([]);
@@ -11,7 +12,7 @@ const UserList = () => {
   useEffect(() => {
     const fetchUsers = async () => {
       try {
-        const response = await axios.get('http://localhost:8080/user'); // Adjust the URL based on your API endpoint
+        const response = await axios.get('https://json-server-main-yeqa.onrender.com/user'); // Adjust the URL based on your API endpoint
         setUsers(response.data);
       } catch (error) {
         console.error('Error fetching users:', error);
@@ -55,8 +56,6 @@ const UserList = () => {
             <th className='border p-2'>Phone</th>
             <th className='border p-2'>Address</th>
             <th className='border p-2'>Action</th>
-
-            {/* Add more table headers as needed */}
           </tr>
         </thead>
         <tbody>
@@ -76,7 +75,6 @@ const UserList = () => {
               <td className='border p-2'>{user.phone}</td>
               <td className='border p-2'>{user.address1?.street}</td>
               <td className='border p-2'>View</td>
-              {/* Add more table cells for additional user properties */}
             </tr>
           ))}
         </tbody>

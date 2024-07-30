@@ -40,7 +40,7 @@ const ProductElement = ({ id, title, image, rating, price, brandName }) => {
       await axios.put(`https://json-server-main-yeqa.onrender.com/user/${localStorage.getItem("id")}`, userObj);
       
       store.dispatch(updateWishlist({ userObj }));
-      toast.success("Product added to the wishlist!");
+      // toast.success("Product added to the wishlist!");
     }
      catch (error) {
       console.error(error);
@@ -87,12 +87,12 @@ const ProductElement = ({ id, title, image, rating, price, brandName }) => {
             </Link>
           {product.isInWishList ? (
               <button
-                className="btn-sm rounded-[50%] bg-[#4a6104] bg-opacity-70 hover:text-red-400 text-red-400 text-lg p-2"
+                className="btn-sm rounded-[50%] bg-[#dc0000] bg-opacity-70 hover:text-red-400 text-red-400 text-lg p-2"
                 onClick={() => {
                   if (loginState) {
                     removeFromWishlistHandler(product);
                   } else {
-                    toast.error("You must be logged in to remove products from the wishlist");
+                    // toast.error("You must be logged in to remove products from the wishlist");
                   }
                 }}
               >
@@ -101,12 +101,12 @@ const ProductElement = ({ id, title, image, rating, price, brandName }) => {
               </button>
             ) : (
               <button
-                className="btn-sm rounded-[50%] bg-[#4a6104] bg-opacity-70 hover:text-red-400 text-lg text-white p-2"
+                className="btn-sm rounded-[50%] bg-gray-800 bg-opacity-70 hover:text-red-400 text-lg text-white p-2"
                 onClick={() => {
                   if (loginState) {
                     addToWishlistHandler(product);
                   } else {
-                    toast.error("You must be logged in to add products to the wishlist");
+                    // toast.error("You must be logged in to add products to the wishlist");
                   }
                 }}
               >
@@ -117,16 +117,16 @@ const ProductElement = ({ id, title, image, rating, price, brandName }) => {
           </div>
       
           <div className="text-left flex items-start justify-between">
-            <span className="text-2xl font-bold tracking-tight text-[#4a6104] max-sm:text-lg">${price}</span>
+            <span className="text-2xl font-bold tracking-tight text-[#dc0000] max-sm:text-lg">&#x20A6;{price}</span>
          
             <button
-              className="btn rounded-xl btnbg hover:bg-[#b6dd40] text-white max-sm:btn-sm"
+              className="btn rounded-xl btnbg hover:bg-[#ffcc00] text-white max-sm:btn-sm"
               onClick={() => {
                 if (loginState) {
                   dispatch(addToCart(product));
                   // toast.success("Product added to the cart!");
                 } else {
-                  toast.error("You must be logged in to add products to the cart");
+                  // toast.error("You must be logged in to add products to the cart");
                 }
               }}
             >

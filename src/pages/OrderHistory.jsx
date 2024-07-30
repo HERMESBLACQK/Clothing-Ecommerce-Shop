@@ -76,7 +76,7 @@ const OrderHistory = () => {
             </h1>
             <Link
               to="/shop"
-              className="btn bg-blue-600 hover:bg-blue-500 text-white mt-10"
+              className="btn bg-[#dc0000] hover:bg-[#ffcc00] text-white mt-10"
             >
               Make your first order
             </Link>
@@ -111,39 +111,40 @@ const OrderHistory = () => {
                             <td>{product.title}</td>
                             <td>{product.selectedSize}</td>
                             <td>{product.amount}</td>
-                            <td>${(product.price * product.amount).toFixed(2)}</td>
+                            <td>&#x20A6;{(product.price * product.amount).toFixed(2)}</td>
                           </tr>
                         ))}
                         <tr>
                           <td colSpan="5" className="text-center">
                             <h4 className="text-md text-accent-content">
-                              Subtotal: ${ Math.round(order?.subtotal) }
+                              Subtotal: &#x20A6;{ Math.round(order?.subtotal) }
                             </h4>
                           </td>
                         </tr>
                         <tr>
                           <td colSpan="5" className="text-center">
                             <h3 className="text-md text-accent-content">
-                              Shipping: $50
+                              Shipping: &#x20A6;1200
                             </h3>
                           </td>
                         </tr>
                         <tr>
                           <td colSpan="5" className="text-center">
                             <h3 className="text-md text-accent-content">
-                              Tax: 20%: ${ Math.round(order?.subtotal / 5) }
+                              Tax: 20%: &#x20A6;{ Math.round(order?.subtotal / 5) }
                             </h3>
                           </td>
                         </tr>
                         <tr>
                           <td colSpan="5" className="text-center">
                             <h3 className="text-lg text-accent-content">
-                              - Order Total: ${ Math.round(order?.subtotal + 50 + (order?.subtotal / 5)) } -
+                              - Order Total: &#x20A6;{ Math.round(order?.subtotal + 50 + (order?.subtotal / 5)) } -
                             </h3>
                           </td>
                         </tr>
                       </tbody>
                     </table>
+                    
                     <button
   className={`btn bg-red-600 text-white max-sm:btn-sm max-sm:text-sm ${
     currentStatus === "Ordered" ? "" : "hidden" // Hide button if order status is not "Ordered"

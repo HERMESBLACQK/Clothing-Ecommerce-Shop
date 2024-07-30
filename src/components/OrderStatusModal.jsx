@@ -17,7 +17,7 @@ const OrderStatusModal = ({ onClose, onUpdateStatus, statusChangeDates }) => {
         <option value="Shipped">Shipped</option>
         <option value="Delivered">Delivered</option>
       </select> <br />
-      <button onClick={handleStatusChange} className="btn bg-[#4a6104] hover:bg-[#b6dd40] border-none text-white mr-4">Update Status</button>
+      <button onClick={handleStatusChange} className="btn bg-[#dc0000] hover:bg-[#ffcc00] border-none text-white mr-4">Update Status</button>
       <button onClick={onClose} className="btn bg-red-500 hover:bg-gray-500 text-white">Cancel</button>
       {statusChangeDates && statusChangeDates.length > 0 && (
         <div>

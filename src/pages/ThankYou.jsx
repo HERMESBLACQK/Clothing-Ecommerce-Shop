@@ -16,7 +16,7 @@ const ThankYou = () => {
 
   const saveToOrderHistory = async () => {
     try {
-      const response = await axios.post("https://json-server-main-yeqa.onrender.com/orders", {
+      await axios.post("https://json-server-main-yeqa.onrender.com/orders", {
         userId: localStorage.getItem("id"),
         orderStatus: "Ordered",
         subtotal: total,
@@ -27,56 +27,53 @@ const ThankYou = () => {
     }
   };
 
-  if (cartItems.length > 0) {
-    saveToOrderHistory();
-    store.dispatch(clearCart());
-    store.dispatch(calculateTotals());
-    toast.success("Order completed");
-  }
-
   useEffect(() => {
     if (!loginState) {
       toast.error("You must be logged in to access this page");
       navigate("/");
+    } else if (cartItems.length > 0) {
+      saveToOrderHistory();
+      store.dispatch(clearCart());
+      store.dispatch(calculateTotals());
+      toast.success("Order completed");
     }
-  }, []);
-
+  }, [loginState, cartItems, navigate]);
 
   return (
     <>
-      <SectionTitle title="Thank You" path="Home | Cart | Thank you" />
-      <div className="thankyou-content text-center text-accent-content mt-4 rounded-md bg-base-200 py-4 px-6 max-w-5xl mx-auto border">
-        <h2 className="text-6xl max-sm:text-4xl">
+      <SectionTitle title="Thank You" path="Home | Cart | Thank You" />
+      <div className="thankyou-content text-center text-accent-content mt-8 p-8 max-w-5xl mx-auto bg-white rounded-lg shadow-lg">
+        <h2 className="text-5xl font-bold text-gray-800 max-sm:text-3xl">
           Thank you for your purchase!
         </h2>
-
-        <h3 className="text-2xl mt-10 max-sm:text-xl">
-          We hope you love your new clothes and shoes! We appreciate your
-          business and look forward to seeing you again soon.
-        </h3>
-        <h3 className="text-2xl mt-5 max-sm:text-xl">
+        <p className="text-lg text-gray-600 mt-6 max-sm:text-md">
+          We hope you love your new clothes and shoes! We appreciate your business and look forward to seeing you again soon.
+        </p>
+        <p className="text-lg text-gray-600 mt-4 max-sm:text-md">
           Here are some things you can do next:
-        </h3>
-        <ul className="text-xl mt-5 text-blue-500 max-sm:text-lg">
-          <li className=" mb-4">
-            <button className="btn bg-blue-600 text-white hover:text-black">
-            <Link to="/order-history">See order history </Link>
-            </button>
+        </p>
+        <ul className="text-lg text-red-600 mt-6 max-sm:text-md">
+          <li className="mb-4">
+            <Link to="/order-history">
+              <button className="btn bg-red-600 text-white hover:bg-red-700 transition-colors duration-200 py-2 px-4 rounded-lg">
+                See order history
+              </button>
+            </Link>
           </li>
-          <li className="">
-            <button className="btn bg-blue-600 text-white hover:text-black">
-            <Link to="/"> Browse more product and buy more </Link>
-            </button>
+          <li>
+            <Link to="/">
+              <button className="btn bg-red-600 text-white hover:bg-red-700 transition-colors duration-200 py-2 px-4 rounded-lg">
+                Browse and buy more
+              </button>
+            </Link>
           </li>
-        
         </ul>
-
-        <h4 className="text-xl mt-5 max-sm:text-lg">
+        <p className="text-lg text-gray-600 mt-6 max-sm:text-md">
           Thank you again for your purchase!
-        </h4>
-        <h4 className="text-xl max-sm:text-lg">
-          Sincerely, The Cabs Store  team
-        </h4>
+        </p>
+        <p className="text-lg text-gray-600 mt-2 max-sm:text-md">
+          Sincerely, The Cabs Store team
+        </p>
       </div>
     </>
   );

@@ -16,10 +16,10 @@ const Pagination = () => {
 
   return (
     <>
-    <div className="pagination flex justify-center mt-10 ">
+    <div className="pagination flex justify-center my-4  ">
       <div className="join">
         <button
-          className="join-item btn  text-4xl flex justify-center hover:bg-[#4a6104] border-none"
+          className="join-item btn  text-4xl flex justify-center hover:bg-[#dc0000] border-none"
           onClick={() => {
             
             if(productsLoaderData.page === 1){
@@ -30,11 +30,11 @@ const Pagination = () => {
           
           }}
         >
-          <FaCircleArrowLeft  className="text-[#4a6104] hover:text-[#b6dd40]"/>
+          <FaCircleArrowLeft  className="text-[#dc0000] hover:text-[#ffcc00]"/>
         </button>
         <button className="join-item btn text-2xl">Page {productsLoaderData.page}</button>
         <button
-          className="join-item btn text-4xl flex justify-center hover:bg-[#4a6104] border-none"
+          className="join-item btn text-4xl flex justify-center hover:bg-[#dc0000] border-none"
           onClick={() => {
 
             if(productsLoaderData.productsLength < 10){
@@ -46,7 +46,7 @@ const Pagination = () => {
           }
           }
         >
-          <FaCircleArrowRight className="text-[#4a6104] hover:text-[#b6dd40]"/>
+          <FaCircleArrowRight className="text-[#dc0000] hover:text-[#ffcc00]"/>
         </button>
       </div>
     </div>

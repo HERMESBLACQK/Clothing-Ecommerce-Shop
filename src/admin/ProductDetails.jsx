@@ -1,90 +1,251 @@
 import axios from "axios";
 import React, { useState, useEffect } from "react";
-import { SectionTitle, SelectSize, SingleProductRating, SingleProductReviews } from "../components";
+import {
+  QuantityInput,
+  SectionTitle,
+  SelectSize,
+  SingleProductRating,
+  SingleProductReviews,
+} from "../components";
 import { nanoid } from "nanoid";
 import { toast } from "react-toastify";
 import parse from "html-react-parser";
+import { useDispatch, useSelector } from "react-redux";
+import { addToCart } from "../features/cart/cartSlice";
+import {
+  updateWishlist,
+  removeFromWishlist,
+} from "../features/wishlist/wishlistSlice";
+import { FaHeart, FaCartShopping } from "react-icons/fa6";
+import { store } from "../store";
 
-const ProductDetails = ({ productId }) => {
+const ProductDetails = ({ id }) => {
   const [productData, setProductData] = useState(null);
   const [currentImage, setCurrentImage] = useState(0);
   const [quantity, setQuantity] = useState(1);
   const [size, setSize] = useState(0);
-  const [rating, setRating] = useState([
-    "empty star",
-    "empty star",
-    "empty star",
-    "empty star",
-    "empty star",
-  ]);
+  const [loading, setLoading] = useState(true);
+  const { wishItems } = useSelector((state) => state.wishlist);
+  const loginState = useSelector((state) => state.auth.isLoggedIn);
+  const dispatch = useDispatch();
 
   useEffect(() => {
     const fetchProductData = async () => {
       try {
-        const response = await axios.get(`http://localhost:8080/products/${productId}`);
+        const response = await axios.get(
+          `https://json-server-main-yeqa.onrender.com/products/${id}`
+        );
         setProductData(response.data);
-        if (response.data) {
-          const updatedRating = Array(response.data.rating).fill("full star");
-          setRating(updatedRating);
-        }
+        setLoading(false);
       } catch (error) {
         console.error("Error fetching product data:", error);
         toast.error("Error fetching product data");
+        setLoading(false);
       }
     };
 
     fetchProductData();
-  }, [productId]);
+  }, [id]);
 
-  if (!productData) {
+  if (loading) {
     return <div>Loading...</div>;
   }
+
+  if (!productData) {
+    return <div>Error loading product data.</div>;
+  }
+
+  const rating = Array(5).fill("empty star").map((star, index) => (
+    index < productData.rating ? "full star" : "empty star"
+  ));
+
+  const product = {
+    id: productData.id + size,
+    title: productData.name,
+    image: productData.imageUrl,
+    rating: productData.rating,
+    price: productData.price.current.value,
+    brandName: productData.brandName,
+    amount: quantity,
+    selectedSize: size || productData.availableSizes[0],
+    isInWishList:
+      wishItems.find((item) => item.id === productData.id + size) !== undefined,
+  };
+
+  const addToWishlistHandler = async (product) => {
+    try {
+      const getResponse = await axios.get(
+        `https://json-server-main-yeqa.onrender.com/user/${localStorage.getItem("id")}`
+      );
+      const userObj = getResponse.data;
+      userObj.userWishlist = userObj.userWishlist || [];
+      userObj.userWishlist.push(product);
+
+      await axios.put(
+        `https://json-server-main-yeqa.onrender.com/user/${localStorage.getItem("id")}`,
+        userObj
+      );
+
+      store.dispatch(updateWishlist({ userObj }));
+      toast.success("Product added to the wishlist!");
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const removeFromWishlistHandler = async (product) => {
+    try {
+      const getResponse = await axios.get(
+        `https://json-server-main-yeqa.onrender.com/user/${localStorage.getItem("id")}`
+      );
+      const userObj = getResponse.data;
+      userObj.userWishlist = userObj.userWishlist || [];
+      const newWishlist = userObj.userWishlist.filter(
+        (item) => product.id !== item.id
+      );
+      userObj.userWishlist = newWishlist;
+
+      await axios.put(
+        `https://json-server-main-yeqa.onrender.com/user/${localStorage.getItem("id")}`,
+        userObj
+      );
+
+      store.dispatch(removeFromWishlist({ userObj }));
+      toast.success("Product removed from the wishlist!");
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   return (
     <>
       <SectionTitle title="Product page" path="Home | Shop | Product page" />
       <div className="grid grid-cols-2 max-w-7xl mx-auto mt-5 max-lg:grid-cols-1 max-lg:mx-5">
-        {/* Product images */}
         <div className="product-images flex flex-col justify-center max-lg:justify-start">
           <img
-            src={`https://${productData?.additionalImageUrls[currentImage]}`}
-            className="w-96 text-center border border-gray-600 cursor-pointer"
-            alt={productData?.name}
+            src={`https://${productData.additionalImageUrls[currentImage]}`}
+            className="w-96 text-center border border-gray-600 cursor-pointer rounded"
+            alt={productData.name}
           />
-          <div className="other-product-images mt-1 grid grid-cols-3 w-96 gap-y-1 gap-x-2 max-sm:grid-cols-2 max-sm:w-64">
-            {productData?.additionalImageUrls.map((imageObj, index) => (
+          <div className="other-product-images mt-1 grid grid-cols-3 w-96 gap-y-1 gap-x-2 max-sm:grid-cols-2 max-sm:w-64 rounded">
+            {productData.additionalImageUrls.map((imageObj, index) => (
               <img
                 src={`https://${imageObj}`}
                 key={nanoid()}
                 onClick={() => setCurrentImage(index)}
-                alt={productData?.name}
+                alt={productData.name}
                 className="w-32 border border-gray-600 cursor-pointer"
               />
             ))}
           </div>
         </div>
-        {/* Product details */}
         <div className="single-product-content flex flex-col gap-y-5 max-lg:mt-2">
-          <h2 className="text-5xl max-sm:text-3xl text-accent-content">{productData?.name}</h2>
+          <h2 className="text-5xl max-sm:text-3xl text-accent-content">
+            {productData.name}
+          </h2>
           <SingleProductRating rating={rating} productData={productData} />
-          <p className="text-3xl text-error">${productData?.price?.current?.value}</p>
-          <div className="text-xl max-sm:text-lg text-accent-content">{parse(productData?.description)}</div>
+          <p className="text-3xl text-error">
+            ${productData.price.current.value}
+          </p>
+          <div className="text-xl max-sm:text-lg text-accent-content">
+            {parse(productData.description)}
+          </div>
           <div className="text-2xl">
-            <SelectSize sizeList={productData?.availableSizes} size={size} setSize={setSize} />
+            <SelectSize
+              sizeList={productData.availableSizes}
+              size={size}
+              setSize={setSize}
+            />
           </div>
           <div>
-            <label htmlFor="Quantity" className="sr-only">Quantity</label>
+            <label htmlFor="Quantity" className="sr-only">
+              Quantity
+            </label>
             <div className="flex items-center gap-1">
               <QuantityInput quantity={quantity} setQuantity={setQuantity} />
             </div>
           </div>
-          {/* Other product info */}
+          <div className="flex flex-row gap-x-2 max-sm:flex-col max-sm:gap-x">
+            <button
+              className="btn bg-blue-600 hover:bg-blue-500 text-white"
+              onClick={() => {
+                if (loginState) {
+                  dispatch(addToCart(product));
+                } else {
+                  toast.error(
+                    "You must be logged in to add products to the cart"
+                  );
+                }
+              }}
+            >
+              <FaCartShopping className="text-xl mr-1" />
+              Add to cart
+            </button>
+
+            {product.isInWishList ? (
+              <button
+                className="btn bg-blue-600 hover:bg-blue-500 text-white"
+                onClick={() => {
+                  if (loginState) {
+                    removeFromWishlistHandler(product);
+                  } else {
+                    toast.error(
+                      "You must be logged in to remove products from the wishlist"
+                    );
+                  }
+                }}
+              >
+                <FaHeart className="text-xl mr-1" />
+                Remove from wishlist
+              </button>
+            ) : (
+              <button
+                className="btn bg-blue-600 hover:bg-blue-500 text-white"
+                onClick={() => {
+                  if (loginState) {
+                    addToWishlistHandler(product);
+                  } else {
+                    toast.error(
+                      "You must be logged in to add products to the wishlist"
+                    );
+                  }
+                }}
+              >
+                <FaHeart className="text-xl mr-1" />
+                Add to wishlist
+              </button>
+            )}
+          </div>
           <div className="other-product-info flex flex-col gap-x-2">
-            {/* Render other product details */}
+            <div className="badge bg-gray-700 badge-lg font-bold text-white p-5 mt-2">
+              Brand: {productData.brandName}
+            </div>
+            <div className="badge bg-gray-700 badge-lg font-bold text-white p-5 mt-2">
+              Gender: {productData.gender}
+            </div>
+            <div
+              className={
+                productData.isInStock
+                  ? "badge bg-gray-700 badge-lg font-bold text-white p-5 mt-2"
+                  : "badge bg-gray-700 badge-lg font-bold text-white p-5 mt-2"
+              }
+            >
+              In Stock: {productData.isInStock ? "Yes" : "No"}
+            </div>
+            <div className="badge bg-gray-700 badge-lg font-bold text-white p-5 mt-2">
+              SKU: {productData.productCode}
+            </div>
+            <div className="badge bg-gray-700 badge-lg font-bold text-white p-5 mt-2">
+              Category: {productData.category}
+            </div>
+            <div className="badge bg-gray-700 badge-lg font-bold text-white p-5 mt-2">
+              Production Date:{" "}
+              {productData.productionDate?.substring(0, 10)}
+            </div>
           </div>
         </div>
       </div>
-      {/* Single product reviews */}
+
       <SingleProductReviews rating={rating} productData={productData} />
     </>
   );

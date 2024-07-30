@@ -22,7 +22,7 @@ const Profile = () => {
     confirmNewPassword: "",
   });
   const navigate = useNavigate();
-  const [editPopupOpen, setEditPopupOpen] = useState(false); // State to manage the edit popup
+  const [editPopupOpen, setEditPopupOpen] = useState(false);
 
   const getUserData = async () => {
     try {
@@ -103,119 +103,110 @@ const Profile = () => {
   return (
     <>
       <SectionTitle title="User Profile" path="Home | User Profile" />
-      <form className="max-w-7xl mx-auto text-center px-10" onSubmit={updateProfile}>
-        <div className="grid grid-cols-3 max-lg:grid-cols-1">
-          <div className="form-control w-full lg:max-w-xs">
+      <form className="max-w-4xl mx-auto text-center px-10 py-6 mt-4 bg-white shadow-lg rounded-lg" onSubmit={updateProfile}>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="form-control w-full">
             <label className="label">
               <span className="label-text">Your Name</span>
             </label>
             <input
               type="text"
               placeholder="Type here"
-              className="input input-bordered w-full lg:max-w-xs"
+              className="input input-bordered w-full"
               value={userFormData.name}
-              onChange={(e) => {setUserFormData({...userFormData, name: e.target.value})}}
+              onChange={(e) => setUserFormData({...userFormData, name: e.target.value})}
             />
           </div>
 
-          <div className="form-control w-full lg:max-w-xs">
+          <div className="form-control w-full">
             <label className="label">
               <span className="label-text">Your Lastname</span>
             </label>
             <input
               type="text"
               placeholder="Type here"
-              className="input input-bordered w-full lg:max-w-xs"
+              className="input input-bordered w-full"
               value={userFormData.lastname}
-              onChange={(e) => {setUserFormData({...userFormData, lastname: e.target.value})}}
+              onChange={(e) => setUserFormData({...userFormData, lastname: e.target.value})}
             />
           </div>
 
-          <div className="form-control w-full lg:max-w-xs">
+          <div className="form-control w-full">
             <label className="label">
               <span className="label-text">Your Email</span>
             </label>
             <input
               type="email"
               placeholder="Type here"
-              className="input input-bordered w-full lg:max-w-xs"
+              className="input input-bordered w-full"
               value={userFormData.email}
-              onChange={(e) => {setUserFormData({...userFormData, email: e.target.value})}}
+              onChange={(e) => setUserFormData({...userFormData, email: e.target.value})}
             />
           </div>
 
-          <div className="form-control w-full lg:max-w-xs">
+          <div className="form-control w-full">
             <label className="label">
               <span className="label-text">Your Phone</span>
             </label>
             <input
               type="tel"
               placeholder="Type here"
-              className="input input-bordered w-full lg:max-w-xs"
+              className="input input-bordered w-full"
               value={userFormData.phone}
-              onChange={(e) => {setUserFormData({...userFormData, phone: e.target.value})}}
+              onChange={(e) => setUserFormData({...userFormData, phone: e.target.value})}
             />
           </div>
 
-          <div className="form-control w-full lg:max-w-xs">
+          <div className="form-control w-full">
             <label className="label">
               <span className="label-text">Your Old Password</span>
             </label>
             <input
               type="password"
               placeholder="Type here"
-              className="input input-bordered w-full lg:max-w-xs"
+              className="input input-bordered w-full"
               value={userFormData.password}
               onChange={(e) => setUserFormData({ ...userFormData, password: e.target.value })}
             />
           </div>
 
-          {/* New Password */}
-          <div className="form-control w-full lg:max-w-xs">
+          <div className="form-control w-full">
             <label className="label">
               <span className="label-text">New Password</span>
             </label>
             <input
               type="password"
               placeholder="Type here"
-              className="input input-bordered w-full lg:max-w-xs"
+              className="input input-bordered w-full"
               value={userFormData.newPassword}
-              onChange={(e) =>
-                setUserFormData({ ...userFormData, newPassword: e.target.value })
-              }
+              onChange={(e) => setUserFormData({ ...userFormData, newPassword: e.target.value })}
             />
           </div>
-          {/* Confirm New Password */}
-          <div className="form-control w-full lg:max-w-xs">
+
+          <div className="form-control w-full">
             <label className="label">
               <span className="label-text">Confirm New Password</span>
             </label>
             <input
               type="password"
               placeholder="Type here"
-              className="input input-bordered w-full lg:max-w-xs"
+              className="input input-bordered w-full"
               value={userFormData.confirmNewPassword}
-              onChange={(e) =>
-                setUserFormData({
-                  ...userFormData,
-                  confirmNewPassword: e.target.value,
-                })
-              }
+              onChange={(e) => setUserFormData({ ...userFormData, confirmNewPassword: e.target.value })}
             />
           </div>
-     
         </div>
         <button
-          className="btn  bg-[#4a6104] hover:bg-[#b6dd40] border-none text-white mt-10"
+          className="btn bg-[#dc0000] hover:bg-[#ffcc00] border-none text-white mt-6 w-full md:w-auto"
           type="submit"
         >
           Update Profile
         </button>
       </form>
-      <div className="border grid grid-cols-2 max-lg:grid-cols-1 mt-10 m-auto w-[50%] max-sm:w-[75%] gap-3">
 
-      <AddressSave addressType="address1" />
-      <AddressSave addressType="address2" />
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mt-4 mb-4 mx-auto w-full lg:w-[50%] max-sm:w-[75%] p-6 bg-white shadow-lg rounded-lg">
+        <AddressSave addressType="address1" />
+        <AddressSave addressType="address2" />
       </div>
     </>
   );

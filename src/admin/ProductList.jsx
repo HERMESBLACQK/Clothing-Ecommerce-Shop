@@ -12,7 +12,7 @@ const ProductList = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get("http://localhost:8080/products");
+        const response = await axios.get("https://json-server-main-yeqa.onrender.com/products");
         setProducts(response.data);
         setFilteredProducts(response.data);
       } catch (error) {

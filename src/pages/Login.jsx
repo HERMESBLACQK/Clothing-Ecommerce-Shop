@@ -60,58 +60,45 @@ const Login = () => {
   };
 
   return (
-    <>
+    <div className="h-screen bg-gray-100">
       <SectionTitle title="Login" path="Home | Login" />
-      <div className="flex flex-col justify-center sm:py-12 ">
-        <div className="p-10 xs:p-0 mx-auto md:w-full md:max-w-md">
-          <div className="bg-slate-200 border-2 border-[#4a6104] shadow w-full rounded-lg divide-y divide-gray-200">
-            <form className="px-5 py-7" onSubmit={proceedLogin}>
-              <label className="font-semibold text-sm pb-1 block text-accent-content">
-                E-mail
-              </label>
+      <div className="container mx-auto p-4 pt-6 md:p-6 lg:p-12">
+        <div className="max-w-md mx-auto p-4 bg-white rounded shadow-md">
+          <form onSubmit={proceedLogin}>
+            <h2 className="text-2xl font-bold mb-4">Login</h2>
+            <label className="block mb-2">
+              <span className="text-gray-700">E-mail</span>
               <input
+                type="email"
                 value={email}
                 required={true}
                 onChange={(e) => setEmail(e.target.value)}
-                type="email"
-                className="border rounded-lg px-3 py-2 mt-1 mb-5 text-sm w-full"
+                className="block w-full p-2 pl-10 text-sm text-gray-700"
+                placeholder="example@example.com"
               />
-              <label className="font-semibold text-sm pb-1 block text-accent-content">
-                Password
-              </label>
+            </label>
+            <label className="block mb-2">
+              <span className="text-gray-700">Password</span>
               <input
                 type="password"
-                required={true}
                 value={password}
+                required={true}
                 onChange={(e) => setPassword(e.target.value)}
-                className="border rounded-lg px-3 py-2 mt-1 mb-5 text-sm w-full"
+                className="block w-full p-2 pl-10 text-sm text-gray-700"
+                placeholder="Password"
               />
-              <button
-                type="submit"
-                className="transition duration-200 bg-[#4a6104] hover:bg-[#b6dd40] border-none focus:ring-opacity-50 text-white w-full py-2.5 rounded-lg text-sm shadow-sm hover:shadow-md font-semibold text-center inline-block"
-              >
-                <span className="inline-block mr-2">Login</span>
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                  className="w-4 h-4 inline-block"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="2"
-                    d="M17 8l4 4m0 0l-4 4m4-4H3"
-                  />
-                </svg>
-              </button>
-            </form>
-          </div>
-          <div className="py-5 text-center">
+            </label>
+            <button
+              type="submit"
+              className="bg-orange-500 hover:bg-orange-700 text-white font-bold py-2 px-4 rounded"
+            >
+              Login
+            </button>
+          </form>
+          <div className="text-center mt-4">
             <Link
               to="/register"
-              className="btn btn-neutral text-white bg-[#4a6104] hover:bg-[#b6dd40] hover:border-white border-none"
+              className="text-gray-500 hover:text-gray-900"
               onClick={() => window.scrollTo(0, 0)}
             >
               Don't have an account? Please register.
@@ -119,7 +106,7 @@ const Login = () => {
           </div>
         </div>
       </div>
-    </>
+    </div>
   );
 };
 

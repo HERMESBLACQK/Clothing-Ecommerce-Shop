@@ -81,10 +81,10 @@ const AddressSave = ({ addressType }) => {
 
   return (
     <>
-    <div className="border  ">
+    <div className="mb-4">
 
   
-    <div className="form-control w-full lg:max-w-xs border p-2 rounded-md bg-base-200">
+    <div className="form-control w-full lg:max-w-xs border p-2 rounded-md bg-base-200 ">
       <h2 className="text-center font-semibold">{addressType === "address1" ? "Address 1" : "Address 2"}</h2>
       {userData[addressType]?.street ? (
         <>
@@ -92,7 +92,7 @@ const AddressSave = ({ addressType }) => {
           <p className="text-lg italic font-semibold">Region: {userData[addressType].region}</p>
           <p className="text-lg italic font-semibold">State: {userData[addressType].state}</p>
           <button
-            className="border btn-sm w-3/12 max-sm:w-5/12 bg-[#4a6104] hover:bg-[#b6dd40] border-none text-white font-semibold rounded-md"
+            className="border btn-sm w-3/12 max-sm:w-5/12 bg-[#dc0000] hover:bg-[#ffcc00] border-none text-white font-semibold rounded-md"
             onClick={() => {
               setEditedAddress({ ...userData[addressType] }); // Set the edited address
               setSelectedAddress(addressType); // Set the selected address
@@ -104,7 +104,7 @@ const AddressSave = ({ addressType }) => {
         </>
       ) : (
         <button
-          className="border btn-sm w-3/12 max-sm:w-5/12 bg-[#4a6104] hover:bg-[#b6dd40] border-none text-white font-semibold rounded-md"
+          className="border btn-sm w-3/12 max-sm:w-5/12 bg-[#dc0000] hover:bg-[#ffcc00] border-none text-white font-semibold rounded-md"
           onClick={() => {
             setSelectedAddress(addressType); // Set the selected address
             setEditPopupOpen(true); // Open the edit popup
@@ -156,7 +156,7 @@ const AddressSave = ({ addressType }) => {
               />
             </label>
             <button
-              className="btn bg-[#4a6104] hover:bg-[#b6dd40] text-white font-semibold"
+              className="btn bg-[#dc0000] hover:bg-[#ffcc00] text-white font-semibold"
               onClick={handleAddressEdit}
             >
               Save

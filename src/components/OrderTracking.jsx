@@ -61,6 +61,14 @@ const OrderTracking = ({ currentStatus }) => {
           </div>
         </div>
       </div>
+      <div className="p-2 m-auto">
+        <p className='text-xl font-bold italic mr-3'>Delivery Address</p>
+    <p className=' font-extrabold text-lg italic'>Street: <span className='text-m font-semibold italic'>Apt 104</span> Region: <span className='text-m font-semibold italic'>Ikeja</span> State: <span className='text-m font-semibold italic'>Lagos</span></p>
+      </div>
+      {/* <div className="p-2 absolute bg-white border ml-36">
+        <p>Expected Day of Delivery</p>
+        <p></p>
+      </div> */}
     </div>
   );
 };

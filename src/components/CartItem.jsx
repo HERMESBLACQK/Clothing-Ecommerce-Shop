@@ -1,16 +1,16 @@
 import React from "react";
 import { useDispatch } from "react-redux";
-import { removeItem, updateCartAmount } from "../features/cart/cartSlice";
+import { removeItem, updateCartAmount, updateCartItemSize } from "../features/cart/cartSlice";
 import SelectSize from "./SelectSize"; // Import the SelectSize component
 
 const CartItem = ({ cartItem }) => {
-  const { id, title, price, image, amount, brandName, selectedSize } = cartItem;
+  const { id, title, price, image, amount, brandName, selectedSize, availableSizes } = cartItem;
   const dispatch = useDispatch();
 
   return (
     <article
       key={id}
-      className="my-4 rounded-md p-1 shadow-lg flex flex-col gap-y-4 sm:flex-row flex-wrap border-b border-base-300 pb-6 last:border-b-0 "
+      className="my-4 rounded-md p-1 shadow-lg flex flex-col gap-y-4 sm:flex-row flex-wrap border-b border-base-300 pb-6 last:border-b-0 bg-white items-center"
     >
       {/* IMAGE */}
       <img
@@ -27,14 +27,7 @@ const CartItem = ({ cartItem }) => {
           Brand: {brandName}
         </h4>
         {/* PASS SelectSize COMPONENT */}
-        <SelectSize
-          sizeList={["S", "M", "L", "XL"]} // Example size list, replace with your actual data
-          size={selectedSize} // Pass selectedSize as the size prop
-          setSize={(newSize) => {
-            // Implement logic to update selected size in db.json or your data store
-            console.log("Selected size:", newSize);
-          }}
-        />
+   
       </div>
       <div className="sm:ml-12">
         {/* AMOUNT */}
@@ -56,11 +49,11 @@ const CartItem = ({ cartItem }) => {
       <div className=" w-2/12 text-right">
         {/* PRICE */}
         <p className="font-medium sm:ml-auto text-accent-content ">
-          ${ (price * amount).toFixed(2) }
+        &#x20A6;{(price * amount).toFixed(2)}
         </p>
         {/* REMOVE */}
         <button
-          className="mt-2 link link-warning link-hover text-sm p-1  rounded-md bg-red-100 text-red-700 px-4"
+          className="mt-2 link link-warning link-hover text-sm p-1 rounded-md bg-red-100 text-red-700 px-4"
           onClick={() => dispatch(removeItem(id))}
         >
           remove

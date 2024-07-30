@@ -20,14 +20,17 @@
           align-items: center;
         }
         .bgc{
-          background-color:  #ddecb1;
+          background-color:  #f597a7;
         }
         .btnbg{
-          background-color: #4a6104;
+          background-color: #dc0000;
         }
         .active{
-          background-color: #4a6104;
+          background-color: #dc0000;
           color: white;
+          /* padding: 5px; */
+          text-align: center;
+          border-radius: 10px;
 
         }
         
@@ -52,7 +55,24 @@
           font-weight: bold;
           color: #28a745; /* Success color */
         }
-        
+        /* Custom Scrollbar Styles */
+.custom-scrollbar::-webkit-scrollbar {
+  width: 12px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: none; 
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: #888; 
+  border-radius: 10px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: #555; 
+}
+
         @keyframes loader-spin {
           to {
             transform: rotate(360deg);

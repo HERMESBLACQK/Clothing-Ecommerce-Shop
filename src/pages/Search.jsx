@@ -54,7 +54,7 @@ const Search = () => {
           />
           <button
             type="submit"
-            className="btn btn-square btn-lg bg-[#4a6104] hover:bg-[#b6dd40] text-white"
+            className="btn btn-square btn-lg bg-[#dc0000] hover:bg-[#ffcc00] text-white"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"

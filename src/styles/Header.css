@@ -1,5 +1,7 @@
+
+
 .navbar-bottom-menu{
-    padding: 20px 0px;
+    padding: 10px 0px;
     display: flex;
     justify-content: center;
 
@@ -19,11 +21,12 @@
 }
 
 .topbar ul li{
+    text-align: center;
     display: flex;
     align-items: center;
     column-gap: 10px;
     justify-content: center;
-    padding: 5px 0px;
+    padding: 5px;
 }
 
 .topbar{

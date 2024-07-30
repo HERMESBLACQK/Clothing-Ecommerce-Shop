@@ -147,8 +147,8 @@ const SingleProduct = () => {
             {productData?.name}
           </h2>
           <SingleProductRating rating={rating} productData={productData} />
-          <p className="text-3xl text-error">
-            ${productData?.price?.current?.value}
+          <p className="text-3xl text-[#dc0000]">
+          &#x20A6;{productData?.price?.current?.value}
           </p>
           <div className="text-xl max-sm:text-lg text-accent-content">
             {parse(productData?.description)}
@@ -172,7 +172,7 @@ const SingleProduct = () => {
           </div>
           <div className="flex flex-row gap-x-2 max-sm:flex-col max-sm:gap-x">
             <button
-              className="btn bg-blue-600 hover:bg-blue-500 text-white"
+              className="btn bg-gray-800 hover:bg-[#ffcc00] text-white"
               onClick={() => {
                 if (loginState) {
                   dispatch(addToCart(product));
@@ -189,7 +189,7 @@ const SingleProduct = () => {
 
             {product?.isInWishList ? (
               <button
-                className="btn bg-blue-600 hover:bg-blue-500 text-white"
+                className="btn bg-gray-800 hover:bg-[#ffcc00] text-white"
                 onClick={() => {
                   if (loginState) {
                     removeFromWishlistHandler(product);
@@ -205,7 +205,7 @@ const SingleProduct = () => {
               </button>
             ) : (
               <button
-                className="btn bg-blue-600 hover:bg-blue-500 text-white"
+                className="btn bg-gray-800 hover:bg-[#ffcc00] text-white"
                 onClick={() => {
                   if (loginState) {
                     addToWishlistHandler(product);

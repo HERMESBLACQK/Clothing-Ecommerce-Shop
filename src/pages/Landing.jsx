@@ -25,23 +25,23 @@ const Landing = () => {
       <Stats />
 
       <div className="selected-products pb-10">
-        <h2 className="text-4xl text-center my-12 max-md:text-4xl text-accent-content">
-          Trending Products
-        </h2>
-        <div className="selected-products-grid max-w-7xl mx-auto">
-          {products.map((product) => (
-            <ProductElement
-              key={product.id}
-              id={product.id}
-              title={product.name}
-              image={product.imageUrl}
-              rating={product.rating}
-              price={product.price.current.value}
-            />
-          ))}
-        </div>
-      </div>
-    </main>
+    <h2 className="text-4xl text-center my-12 max-md:text-4xl text-accent-content">
+      Trending Products
+    </h2>
+    <div className="selected-products-grid max-w-7xl mx-auto">
+      {products.map((product) => (
+        <ProductElement
+          key={product.id}
+          id={product.id}
+          title={product.name}
+          image={product.imageUrl}
+          rating={product.rating}
+          price={product.price.current.value}
+        />
+      ))}
+    </div>
+  </div>
+</main>
   );
 };
 

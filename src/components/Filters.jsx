@@ -64,81 +64,93 @@ const Filters = () => {
     "Dr Martens",
     "River Island",
   ]);
- 
+
   return (
-    <Form className="bg-base-200 rounded-md h-[650px] max-md:h-[730px] max-md:mb-4 px-4 max-md:grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 items-center">
-      <div className="border p-1">
-    
+    <Form className="bg-white shadow-md rounded-md p-4 max-w-sm h-[580px] mx-auto mt-4 mb-4">
+      <h2 className="text-2xl font-bold mb-4">Filters</h2>
+      <div className="grid grid-cols-2 gap-4">
+        {/* SEARCH */}
+        <FormInput
+          type="search"
+          label="Search product"
+          name="search"
+          size="input-md"
+          defaultValue=""
+          className="w-full"
+        />
+        {/* CATEGORIES */}
+        <FormSelect
+          label="Select category"
+          name="category"
+          list={selectCategoryList}
+          size="select-md"
+          defaultValue="all"
+          className="w-full"
+        />
+        {/* COMPANIES */}
+        <FormSelect
+          label="Select brand"
+          name="brand"
+          list={selectBrandList}
+          size="select-md"
+          defaultValue="all"
+          className="w-full"
+        />
+        {/* ORDER */}
+        <FormSelect
+          label="Sort by"
+          name="order"
+          list={["asc", "desc", "price high", "price low"]}
+          size="select-md"
+          defaultValue="a-z"
+          className="w-full"
+        />
+        {/* Producer */}
+        <FormSelect
+          label="Select gender"
+          name="gender"
+          list={["all", "male", "female"]}
+          size="select-md"
+          defaultValue="all"
+          className="w-full"
+        />
+        {/* PRICE */}
+        <FormRange
+          name="price"
+          label="Select price"
+          size="range-md"
+          price={2000}
+          className="w-full"
+        />
+        {/* Date Picker */}
+        <FormDatePicker
+          label="Select minimum production date"
+          name="date"
+          className="w-full "
+        />
+        {/* In stock */}
+        <FormCheckbox
+          label="Only products in stock"
+          name="stock"
+          defaultValue="false"
+          className="w-full"
+        />
       </div>
-      {/* SEARCH */}
-      <FormInput
-        type="search"
-        label="search product"
-        name="search"
-        size="input-sm"
-        defaultValue=""
-      />
-      {/* CATEGORIES */}
-      <FormSelect
-        label="select category"
-        name="category"
-        list={selectCategoryList}
-        size="select-sm"
-        defaultValue="all"
-      />
-      {/* COMPANIES */}
-      <FormSelect
-        label="select brand"
-        name="brand"
-        list={selectBrandList}
-        size="select-sm"
-        defaultValue="all"
-      />
-      {/* ORDER */}
-      <FormSelect
-        label="sort by"
-        name="order"
-        list={["asc", "desc", "price high", "price low"]}
-        size="select-sm"
-        defaultValue="a-z"
-      />
-      {/* Producer */}
-      <FormSelect
-        label="Select gender"
-        name="gender"
-        list={["all", "male", "female"]}
-        size="select-sm"
-        defaultValue="all"
-      />
-      {/* PRICE */}
-      <FormRange
-        name="price"
-        label="select price"
-        size="range-sm"
-        price={2000}
-        className="text-[#b6dd40]"
-      />
-      {/* Date Picker */}
-      <FormDatePicker label="select minimum production date" name="date" />
-
-      {/* In stock */}
-      <FormCheckbox
-        label="Only products in stock"
-        name="stock"
-        defaultValue="false"
-      />
-
-      {/* BUTTONS */}
-
-      <button
-        type="submit"
-        className="btn bg-[#4a6104] hover:bg-[#b6dd40] text-white m-2"
-      >
-        search
-      </button>
-      <Link to="/shop?page=1" className="btn bg-[#4a6104] hover:bg-[#b6dd40] text-white m-2">
-        reset
-      </Link>
+      <div className="flex justify-between mt-4 items-center">
+        {/* BUTTONS */}
+        <button
+          type="submit"
+          className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
+        >
+          Search
+        </button>
+        <Link
+          to="/shop?page=1"
+          className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
+        >
+          Reset
+        </Link>
+      </div>
     </Form>
   );
 };

@@ -1,6 +1,6 @@
 const FormCheckbox = ({ label, name, defaultValue, size }) => {
     return (
-      <div className='form-control items-center border m-2'>
+      <div className='form-control items-center m-2'>
         <label htmlFor={name} className='label cursor-pointer'>
           <span className='label-text uppercase text-xs'>{label}</span>
         </label>
